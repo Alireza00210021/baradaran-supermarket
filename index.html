@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>سوپرمارکت برادران</title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Vazirmatn:wght@300;500;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:linear-gradient(rgba(15,23,42,0.45),rgba(15,23,42,0.45)),url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;font-family:Vazirmatn,sans-serif;padding:20px;color:#4a4a4a;min-height:100vh}
@@ -65,6 +65,7 @@ h1{font-family:Pacifico,cursive;font-size:2.8rem;color:#e91e63;text-align:center
 
 .modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:center;z-index:999;opacity:0;pointer-events:none;transition:.3s}.modal.show{opacity:1;pointer-events:auto}.box{background:#fff;padding:35px;border-radius:40px;max-width:400px;text-align:center;box-shadow:0 30px 60px #0005}.box h2{color:#2e7d32;margin-bottom:12px}.modal button{margin-top:18px;padding:10px 28px;border:0;border-radius:30px;background:#e91e63;color:#fff;font:1rem Vazirmatn}
 
+/* فرم ثبت سفارش */
 .order-form-modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(6px);display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;pointer-events:none;transition:.3s;padding:16px}
 .order-form-modal.show{opacity:1;pointer-events:auto}
 .order-form-box{width:min(520px,96vw);max-height:92vh;overflow-y:auto;background:#fff;padding:26px;border-radius:28px;box-shadow:0 30px 70px #0005}
@@ -72,14 +73,32 @@ h1{font-family:Pacifico,cursive;font-size:2.8rem;color:#e91e63;text-align:center
 .order-form-note{text-align:center;color:#777;font-size:.88rem;margin-bottom:18px}
 .form-group{margin-bottom:13px}.form-group label{display:block;color:#ad1457;font-weight:700;font-size:.9rem;margin-bottom:6px}
 .form-group input,.form-group textarea{width:100%;border:2px solid #f3d3df;border-radius:14px;padding:11px 13px;font:500 .95rem Vazirmatn;outline:none;background:#fff}
-.form-group textarea{min-height:95px;resize:vertical}
+.form-group textarea{min-height:85px;resize:vertical}
 .form-group input:focus,.form-group textarea:focus{border-color:#e91e63;box-shadow:0 0 0 4px #e91e6312}
+
+/* استایل جدید انتخاب روش پرداخت و باکس کارت */
+.payment-options{display:flex;gap:10px;margin-top:6px}
+.payment-option{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;border:2px solid #f3d3df;border-radius:14px;cursor:pointer;font-weight:700;color:#ad1457;transition:.25s;background:#fff;user-select:none}
+.payment-option:hover{border-color:#e91e63;background:#fffafb}
+.payment-option.active{border-color:#e91e63;background:#fff0f5;color:#e91e63;box-shadow:0 4px 12px rgba(233,30,99,0.12)}
+.payment-option input[type="radio"]{accent-color:#e91e63;width:16px;height:16px;cursor:pointer}
+
+.card-details-box{background:#fff0f5;border:2px dashed #f48fb1;border-radius:18px;padding:16px;margin-top:14px;margin-bottom:10px;text-align:center;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.card-info{background:#fff;border-radius:12px;padding:12px;box-shadow:0 4px 10px rgba(233,30,99,0.08);margin-bottom:12px;border:1px solid #f8bbd0}
+.card-title{font-size:.82rem;color:#777;margin-bottom:4px;font-weight:500}
+.card-number{font-size:1.3rem;font-weight:800;color:#ad1457;letter-spacing:1.5px;direction:ltr;margin:6px 0;font-family:sans-serif}
+.card-owner{font-size:.95rem;font-weight:700;color:#333}
+.card-note{font-size:.86rem;color:#880e4f;margin-bottom:12px;line-height:1.5;font-weight:600}
+.card-telegram-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#0088cc,#00a2f3);color:#fff;text-decoration:none;padding:10px 18px;border-radius:50px;font-weight:700;font-size:.88rem;box-shadow:0 4px 12px rgba(0,136,204,0.3);transition:.2s}
+.card-telegram-link:hover{transform:scale(1.03);box-shadow:0 6px 16px rgba(0,136,204,0.4)}
+
 .form-error{color:#c62828;background:#ffebee;border-radius:12px;padding:9px 12px;margin-bottom:12px;font-size:.85rem;display:none}
 .form-actions{display:flex;gap:10px;margin-top:18px}.form-actions button{flex:1;padding:12px;border:0;border-radius:50px;font:700 .95rem Vazirmatn;cursor:pointer}
 .cancel-order{background:#eee;color:#555}.submit-order{background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff}
 .submit-order:disabled{background:#ccc;cursor:not-allowed}
 
-/* استایل‌های اختصاصی فوتر و ارتباط با ما */
+/* فوتر و بخش ارتباط با ما */
 footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px dashed rgba(233,30,99,0.25)}
 .footer-text{color:#ad1457;font-size:1rem;font-weight:700;margin-bottom:18px}
 
@@ -90,10 +109,10 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px dashed 
 .contact-row{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:480px;padding:12px 20px;border-radius:18px;background:#ffffff;border:1.5px solid #f48fb1;color:#ad1457;text-decoration:none;font-weight:700;font-size:0.98rem;box-shadow:0 4px 12px rgba(233,30,99,0.06);transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
 .contact-row:hover{transform:scale(1.06);background:#fff0f5;border-color:#e91e63;color:#e91e63;box-shadow:0 8px 22px rgba(233,30,99,0.22)}
 
-.contact-svg{width:24px;height:24px;fill:currentColor;flex-shrink:0}
+.contact-svg{width:22px;height:22px;fill:currentColor;flex-shrink:0}
 
 .empty{text-align:center;padding:50px 10px;color:#999;grid-column:1/-1}
-@media(max-width:600px){body{padding:10px}.container{padding:22px 14px;border-radius:28px}h1{font-size:2.2rem}.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-img{height:135px}.product-info{padding:12px}.product-name{font-size:.9rem}.product-price{font-size:1rem}.contact-row{font-size:0.88rem;padding:10px 14px}}
+@media(max-width:600px){body{padding:10px}.container{padding:22px 14px;border-radius:28px}h1{font-size:2.2rem}.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-img{height:135px}.product-info{padding:12px}.product-name{font-size:.9rem}.product-price{font-size:1rem}.contact-row{font-size:0.88rem;padding:10px 14px}.payment-options{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
@@ -146,19 +165,16 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px dashed 
     <div class="contact-title">ارتباط با ما</div>
     <div class="contact-list">
 
-      <!-- آدرس (لوکیشن) -->
       <div class="contact-row">
         <svg class="contact-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         <span>آدرس: مشهد، بین مفتح ۳۵ و ۳۷</span>
       </div>
 
-      <!-- شماره تماس (واتساپ / تماس) -->
       <a href="tel:05132577363" class="contact-row">
         <svg class="contact-svg" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.82 14.15c-.25.7-.85 1.27-1.57 1.55-.72.28-2.69.37-5.07-1.01-2.97-1.72-4.9-4.78-5.05-4.98-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.17 1.03-2.46.27-.29.6-.36.8-.36.2 0 .4 0 .58.01.19.01.44-.07.69.53.25.6.86 2.09.93 2.24.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.48.13.66-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.71-.15.29.11 1.86.88 2.18 1.04.32.16.53.24.61.38.08.13.08.78-.17 1.48z"/></svg>
-        <span>شماره تماس: ۳۲۵۷۷۳۶۳-۰۵۱</span>
+        <span>شماره تماس: ۰۵۱-۳۲۵۷۷۳۶۳</span>
       </a>
 
-      <!-- آیدی تلگرام -->
       <a href="https://t.me/i_am_no_body" target="_blank" class="contact-row">
         <svg class="contact-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
         <span>آیدی تلگرام: @i_am_no_body</span>
@@ -178,6 +194,7 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px dashed 
 <div class="cart-footer"><div class="total">جمع کل: <span id="cart-total">۰</span> تومان</div><button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>ثبت سفارش و ارسال به تلگرام</button></div>
 </div>
 
+<!-- مودال دریافت اطلاعات سفارش -->
 <div class="order-form-modal" id="orderFormModal">
 <div class="order-form-box">
 <h2>اطلاعات تحویل سفارش</h2>
@@ -187,10 +204,40 @@ footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px dashed 
 <div class="form-group"><label for="lastName">نام خانوادگی</label><input id="lastName" type="text" maxlength="80" autocomplete="family-name" placeholder="مثلاً رضایی"></div>
 <div class="form-group"><label for="phone">شماره تماس</label><input id="phone" type="tel" inputmode="numeric" maxlength="11" autocomplete="tel" placeholder="مثلاً 09123456789"></div>
 <div class="form-group"><label for="address">آدرس</label><textarea id="address" maxlength="500" autocomplete="street-address" placeholder="آدرس کامل برای تحویل سفارش"></textarea></div>
+
+<!-- روش پرداخت -->
+<div class="form-group">
+  <label>روش پرداخت <span style="color:#c62828">*</span></label>
+  <div class="payment-options">
+    <label class="payment-option active" id="opt-cod">
+      <input type="radio" name="paymentMethod" value="پرداخت درب محل" checked onchange="togglePaymentDetails('cod')">
+      <span>💵 پرداخت درب محل</span>
+    </label>
+    <label class="payment-option" id="opt-online">
+      <input type="radio" name="paymentMethod" value="پرداخت آنلاین" onchange="togglePaymentDetails('online')">
+      <span>💳 پرداخت آنلاین</span>
+    </label>
+  </div>
+</div>
+
+<!-- باکس نمایش اطلاعات کارت (فقط در حالت پرداخت آنلاین) -->
+<div class="card-details-box" id="cardDetailsBox" style="display:none;">
+  <div class="card-info">
+    <div class="card-title">شماره کارت جهت واریز:</div>
+    <div class="card-number">6037-6974-8494-5131</div>
+    <div class="card-owner">به نام: علیرضا علیپور اول</div>
+  </div>
+  <div class="card-note">لطفا رسید پرداخت را به آیدی زیر ارسال کنید تا خرید تکمیل شود:</div>
+  <a href="https://t.me/i_am_no_body" target="_blank" class="card-telegram-link">
+    <svg class="contact-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+    <span>ارسال رسید به تلگرام (@i_am_no_body)</span>
+  </a>
+</div>
+
 <div class="form-actions"><button class="cancel-order" type="button" onclick="closeOrderForm()">انصراف</button><button class="submit-order" id="submitOrderBtn" type="button" onclick="submitOrder()">ثبت نهایی سفارش</button></div>
 </div></div>
 
-<div class="modal" id="successModal"><div class="box"><h2>سفارش ثبت شد! ✅</h2><p>سفارش شما با موفقیت برای فروشگاه ارسال شد.<br>به‌زودی با شما تماس می‌گیریم.</p><button onclick="closeModal()">باشه</button></div></div>
+<div class="modal" id="successModal"><div class="box"><h2>سفارش ثبت شد! ✅</h2><p id="successMessage">سفارش شما با موفقیت برای فروشگاه ارسال شد.<br>به‌زودی با شما تماس می‌گیریم.</p><button onclick="closeModal()">باشه</button></div></div>
 
 <script>
 const products=[
@@ -242,7 +289,6 @@ function addToCart(id, event){
  const i=cart.find(x=>x.id===id);i?i.qty++:cart.push({...p,qty:1});
  updateCartUI();
 
- // انیمیشن پرتاب نرم به سبد خرید
  if(event){
   const card = event.target.closest('.product-card');
   const img = card ? card.querySelector('.product-img') : null;
@@ -269,7 +315,7 @@ function addToCart(id, event){
    `;
 
    document.body.appendChild(flyImg);
-   flyImg.getBoundingClientRect(); // Reflow
+   flyImg.getBoundingClientRect();
 
    flyImg.style.top = `${cartRect.top + cartRect.height/2 - 20}px`;
    flyImg.style.left = `${cartRect.left + cartRect.width/2 - 20}px`;
@@ -304,6 +350,24 @@ function clearFormError(){const el=document.getElementById("formError");el.textC
 function openOrderForm(){clearFormError();document.getElementById("orderFormModal").classList.add("show");document.getElementById("firstName").focus();}
 function closeOrderForm(){document.getElementById("orderFormModal").classList.remove("show");}
 function checkout(){if(!cart.length)return;openOrderForm();}
+
+// مدیریت تغییر روش پرداخت
+function togglePaymentDetails(type){
+  const cardBox = document.getElementById("cardDetailsBox");
+  const optCod = document.getElementById("opt-cod");
+  const optOnline = document.getElementById("opt-online");
+
+  if(type === 'online'){
+    cardBox.style.display = "block";
+    optOnline.classList.add("active");
+    optCod.classList.remove("active");
+  } else {
+    cardBox.style.display = "none";
+    optCod.classList.add("active");
+    optOnline.classList.remove("active");
+  }
+}
+
 async function submitOrder(){
 if(!cart.length)return;
 clearFormError();
@@ -311,14 +375,32 @@ const firstName=document.getElementById("firstName").value.trim();
 const lastName=document.getElementById("lastName").value.trim();
 const phone=normalizePhone(document.getElementById("phone").value);
 const address=document.getElementById("address").value.trim();
+
+// چک کردن انتخاب روش پرداخت
+const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+if(!selectedPayment){
+  showFormError("لطفاً یک روش پرداخت را انتخاب کنید.");
+  return;
+}
+const paymentMethod = selectedPayment.value;
+
 if(!firstName||!lastName||!phone||!address){showFormError("پر کردن تمام کادرها الزامی است.");return;}
 if(!/^09\d{9}$/.test(phone)){showFormError("شماره تماس اشتباه است؛ شماره باید دقیقاً ۱۱ رقمی و با 09 شروع شود.");return;}
+
 const btn=document.getElementById("submitOrderBtn");btn.disabled=true;btn.textContent="در حال ثبت سفارش...";
 const items=cart.map(i=>({id:i.id,name:i.name,qty:i.qty,price:i.price}));
+
 try{
-const r=await fetch("https://script.google.com/macros/s/AKfycbz2eK3vV-j1-P7nwgZOsKtxrWkCgTwj6y88gjD8NrE6iHxjYPVFQl-dkp306JNTr8mv/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({firstName:firstName,lastName:lastName,phone:phone,address:address,items:items})});
+const r=await fetch("https://script.google.com/macros/s/AKfycbz2eK3vV-j1-P7nwgZOsKtxrWkCgTwj6y88gjD8NrE6iHxjYPVFQl-dkp306JNTr8mv/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({firstName:firstName,lastName:lastName,phone:phone,address:address,paymentMethod:paymentMethod,items:items})});
 const text=await r.text();let d;try{d=JSON.parse(text);}catch(_){throw new Error("پاسخ نامعتبر از سرور دریافت شد.");}
 if(!d.ok)throw new Error(d.error||"خطا در ثبت سفارش");
+
+// پیام موفقیت متناسب با روش پرداخت
+const successMsg = paymentMethod === "پرداخت آنلاین" 
+  ? "سفارش شما با موفقیت ثبت شد.<br>لطفاً تصویر رسید پرداخت را به آیدی تلگرام ارسال فرمایید." 
+  : "سفارش شما با موفقیت ثبت شد.<br>به‌زودی برای هماهنگی ارسال با شما تماس می‌گیریم.";
+document.getElementById("successMessage").innerHTML = successMsg;
+
 cart=[];updateCartUI();closeOrderForm();toggleCart();document.getElementById("successModal").classList.add("show");
 document.getElementById("firstName").value="";document.getElementById("lastName").value="";document.getElementById("phone").value="";document.getElementById("address").value="";
 }catch(e){showFormError(e.message||"ارسال سفارش انجام نشد. لطفاً دوباره تلاش کنید.");console.error(e);}
