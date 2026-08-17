@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سوپرمارکت برادران</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#fce4ec,#f3e5f5,#e8eaf6);background-size:400% 400%;animation:g 12s ease infinite;font-family:Vazirmatn,sans-serif;padding:20px;color:#4a4a4a;min-height:100vh}
+@keyframes g{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.container{max-width:1200px;margin:auto;background:#ffffffc7;backdrop-filter:blur(15px);border-radius:40px;padding:30px 25px;box-shadow:0 25px 50px #e91e6326}
+h1{font-family:Pacifico,cursive;font-size:2.8rem;color:#e91e63;text-align:center;margin-bottom:6px;text-shadow:2px 2px #f8bbd0}
+.subtitle{display:inline-block;text-align:center;font-size:1.1rem;color:#ab47bc;margin-bottom:20px;background:#f8bbd0;padding:6px 22px;border-radius:50px}
+.search-wrap{max-width:650px;margin:0 auto 20px;position:relative}
+#search{width:100%;padding:14px 50px 14px 18px;border:2px solid #f8bbd0;border-radius:50px;outline:none;font:500 1rem Vazirmatn;background:#fff}
+#search:focus{border-color:#e91e63;box-shadow:0 0 0 4px #e91e6312}
+.search-icon{position:absolute;right:18px;top:11px;font-size:1.4rem}
+.categories{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:25px}
+.cat-btn{padding:10px 20px;border:0;border-radius:50px;background:#fff;color:#ad1457;font-family:Vazirmatn;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 4px 12px #e91e631f}
+.cat-btn.active,.cat-btn:hover{background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff;transform:translateY(-2px)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-bottom:40px}
+.product-card{background:#fffffff2;border-radius:22px;overflow:hidden;box-shadow:0 8px 20px #e91e631a;transition:.3s;border:1px solid #fff;position:relative}
+.product-card:hover{transform:translateY(-7px);box-shadow:0 14px 28px #e91e632e}
+.out-of-stock{opacity:.72}
+.badge{position:absolute;top:12px;right:12px;background:#c62828;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:700;z-index:2}
+.product-img{width:100%;height:170px;object-fit:cover;background:#fce4ec}
+.product-info{padding:16px}.product-name{font-size:1.05rem;font-weight:700;color:#ad1457;margin-bottom:6px;line-height:1.4}.product-price{font-size:1.15rem;color:#e91e63;font-weight:700;margin-bottom:12px;min-height:28px}.soon{color:#9c27b0!important;font-size:.95rem!important;font-weight:500!important}
+.add-btn{width:100%;padding:10px;border:0;border-radius:50px;background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff;font-family:Vazirmatn;font-weight:600;cursor:pointer}.add-btn:disabled{background:#bdbdbd;cursor:not-allowed}
+.cart-toggle{position:fixed;bottom:25px;left:25px;background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;box-shadow:0 8px 25px #e91e6359;z-index:100}.cart-count{position:absolute;top:-5px;right:-5px;background:#ffeb3b;color:#ad1457;width:24px;height:24px;border-radius:50%;font-size:.85rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.cart-sidebar{position:fixed;top:0;left:-400px;width:360px;max-width:92vw;height:100%;background:#fff;box-shadow:10px 0 40px #00000026;z-index:200;transition:left .4s;display:flex;flex-direction:column;border-radius:0 30px 30px 0}.cart-sidebar.open{left:0}
+.cart-header{background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff;padding:20px;font-size:1.35rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;border-radius:0 30px 0 0}.close-cart{background:none;border:0;color:#fff;font-size:1.8rem;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto;padding:15px}.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #fce4ec;align-items:center}.cart-item img{width:58px;height:58px;object-fit:cover;border-radius:12px}.cart-item-info{flex:1}.cart-item-name{font-weight:600;color:#ad1457;font-size:.92rem}.cart-item-price{color:#e91e63;font-weight:700;font-size:.9rem}.qty{display:flex;align-items:center;gap:8px;margin-top:4px}.qty button{width:26px;height:26px;border:0;border-radius:50%;background:#f8bbd0;color:#ad1457;font-weight:700;cursor:pointer}.remove{background:none;border:0;color:#e91e63;font-size:1.2rem;cursor:pointer}
+.cart-footer{padding:18px;border-top:2px solid #fce4ec;background:#fffafb}.total{font-size:1.25rem;font-weight:700;color:#ad1457;margin-bottom:14px;text-align:center}.checkout-btn{width:100%;padding:14px;border:0;border-radius:50px;background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff;font-family:Vazirmatn;font-size:1.05rem;font-weight:700;cursor:pointer}.checkout-btn:disabled{background:#ccc;cursor:not-allowed}
+.modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:center;z-index:999;opacity:0;pointer-events:none;transition:.3s}.modal.show{opacity:1;pointer-events:auto}.box{background:#fff;padding:35px;border-radius:40px;max-width:400px;text-align:center;box-shadow:0 30px 60px #0005}.box h2{color:#2e7d32;margin-bottom:12px}.modal button{margin-top:18px;padding:10px 28px;border:0;border-radius:30px;background:#e91e63;color:#fff;font:1rem Vazirmatn}
+
+.order-form-modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(6px);display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;pointer-events:none;transition:.3s;padding:16px}
+.order-form-modal.show{opacity:1;pointer-events:auto}
+.order-form-box{width:min(520px,96vw);max-height:92vh;overflow-y:auto;background:#fff;padding:26px;border-radius:28px;box-shadow:0 30px 70px #0005}
+.order-form-box h2{color:#ad1457;text-align:center;margin-bottom:8px;font-size:1.45rem}
+.order-form-note{text-align:center;color:#777;font-size:.88rem;margin-bottom:18px}
+.form-group{margin-bottom:13px}.form-group label{display:block;color:#ad1457;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.form-group input,.form-group textarea{width:100%;border:2px solid #f3d3df;border-radius:14px;padding:11px 13px;font:500 .95rem Vazirmatn;outline:none;background:#fff}
+.form-group textarea{min-height:95px;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:#e91e63;box-shadow:0 0 0 4px #e91e6312}
+.form-error{color:#c62828;background:#ffebee;border-radius:12px;padding:9px 12px;margin-bottom:12px;font-size:.85rem;display:none}
+.form-actions{display:flex;gap:10px;margin-top:18px}.form-actions button{flex:1;padding:12px;border:0;border-radius:50px;font:700 .95rem Vazirmatn;cursor:pointer}
+.cancel-order{background:#eee;color:#555}.submit-order{background:linear-gradient(135deg,#e91e63,#ab47bc);color:#fff}
+.submit-order:disabled{background:#ccc;cursor:not-allowed}
+
+footer{text-align:center;margin-top:25px;color:#9c27b0;font-size:.9rem}
+.empty{text-align:center;padding:50px 10px;color:#999;grid-column:1/-1}
+@media(max-width:600px){body{padding:10px}.container{padding:22px 14px;border-radius:28px}h1{font-size:2.2rem}.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-img{height:135px}.product-info{padding:12px}.product-name{font-size:.9rem}.product-price{font-size:1rem}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>سوپرمارکت برادران</h1>
+<div style="text-align:center"><span class="subtitle">تازگی و کیفیت در هر خرید</span></div>
+<div class="search-wrap"><span class="search-icon">🔎</span><input id="search" type="search" placeholder="جستجوی محصول..." autocomplete="off"></div>
+<div class="categories" id="categories"></div>
+<div class="products-grid" id="products-grid"></div>
+<footer>سوپرمارکت برادران • همه چیز تازه و باکیفیت</footer>
+</div>
+
+<div class="cart-toggle" onclick="toggleCart()">🛒<span class="cart-count" id="cart-count">0</span></div>
+<div class="cart-sidebar" id="cart-sidebar">
+<div class="cart-header"><span>سبد خرید شما</span><button class="close-cart" onclick="toggleCart()">×</button></div>
+<div class="cart-items" id="cart-items"></div>
+<div class="cart-footer"><div class="total">جمع کل: <span id="cart-total">۰</span> تومان</div><button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>ثبت سفارش و ارسال به تلگرام</button></div>
+</div>
+
+
+<div class="order-form-modal" id="orderFormModal">
+<div class="order-form-box">
+<h2>اطلاعات تحویل سفارش</h2>
+<div class="order-form-note">لطفاً اطلاعات خود را کامل وارد کنید.</div>
+<div class="form-error" id="formError"></div>
+<div class="form-group"><label for="firstName">نام</label><input id="firstName" type="text" maxlength="60" autocomplete="given-name" placeholder="مثلاً علی"></div>
+<div class="form-group"><label for="lastName">نام خانوادگی</label><input id="lastName" type="text" maxlength="80" autocomplete="family-name" placeholder="مثلاً رضایی"></div>
+<div class="form-group"><label for="phone">شماره تماس</label><input id="phone" type="tel" inputmode="numeric" maxlength="11" autocomplete="tel" placeholder="مثلاً 09123456789"></div>
+<div class="form-group"><label for="address">آدرس</label><textarea id="address" maxlength="500" autocomplete="street-address" placeholder="آدرس کامل برای تحویل سفارش"></textarea></div>
+<div class="form-actions"><button class="cancel-order" type="button" onclick="closeOrderForm()">انصراف</button><button class="submit-order" id="submitOrderBtn" type="button" onclick="submitOrder()">ثبت نهایی سفارش</button></div>
+</div></div>
+
+<div class="modal" id="successModal"><div class="box"><h2>سفارش ثبت شد! ✅</h2><p>سفارش شما با موفقیت برای فروشگاه ارسال شد.<br>به‌زودی با شما تماس می‌گیریم.</p><button onclick="closeModal()">باشه</button></div></div>
+
+<script>
+const products=[
+{id:1,name:"فلفل سیاه (بسته ۷۰ گرمی)",price:100,category:"ادویه‌جات",image:"images/blackpepper.svg",inStock:true},
+{id:2,name:"نمک تصفیه‌شده (بسته‌بندی)",price:60,category:"ادویه‌جات",image:"images/salt.svg",inStock:true},
+{id:3,name:"فلفل قرمز (بسته ۷۰ گرمی)",price:100,category:"ادویه‌جات",image: "https://drive.google.com/thumbnail?id=1f8CUIZMJWLEssqCnNzQNEKHwdI42MeUF&sz=w1000",inStock:true},
+{id:4,name:"زردچوبه (بسته ۷۰ گرمی)",price:110,category:"ادویه‌جات",image:"images/turmeric.svg",inStock:true},
+{id:5,name:"زعفران (بسته ۵ گرمی)",price:800,category:"ادویه‌جات",image:"images/saffron.svg",inStock:true},
+{ id: 6, name: "دارچین پودری", price: 0, category: "ادویه‌جات", image: "https://drive.google.com/thumbnail?id=1ee1FMZ93M0qv73LxZB3IXJ23h8S2Rf-1&sz=w1000", inStock: false },{id:7,name:"زیره سبز",price:0,category:"ادویه‌جات",image:"images/cumin.svg",inStock:false},
+{id:8,name:"سماق",price:0,category:"ادویه‌جات",image:"images/sumac.svg",inStock:false},
+{id:11,name:"نوشابه کوکا کولا ۱.۵ لیتری",price:0,category:"نوشیدنی‌ها",image: "https://drive.google.com/thumbnail?id=1Vi_Vi9SH2pStJy2pFJS9ytavtkUpIbjx&sz=w1000",inStock:true},
+{id:12,name:"دوغ آبعلی ۱ لیتری",price:0,category:"نوشیدنی‌ها",image:"https://drive.google.com/thumbnail?id=1TwRYKl0DWyUxxG5RAaJ7vwP1vFuJ2AKs&sz=w1000",inStock:true},
+{id:13,name:"آبمیوه سن‌ایچ پرتقال",price:0,category:"نوشیدنی‌ها",image:"https://drive.google.com/thumbnail?id=1wKiboGFtnnO4HGITSdbjnCmIaeXEs8EN&sz=w1000",inStock:true},
+{id:14,name:"ماءالشعیر ایستک",price:0,category:"نوشیدنی‌ها",image:"images/malt.svg",inStock:true},
+{id:21,name:"شیر کم‌چرب ۱ لیتری",price:0,category:"لبنیات",image:"images/milk.svg",inStock:true},
+{id:22,name:"ماست سفت ۹۰۰ گرمی",price:0,category:"لبنیات",image:"images/yogurt.svg",inStock:true},
+{id:23,name:"پنیر سفید ۴۰۰ گرمی",price:0,category:"لبنیات",image:"images/cheese.svg",inStock:true},
+{id:31,name:"چیپس مزمز بزرگ",price:0,category:"تنقلات",image:"images/chips.svg",inStock:true},
+{id:32,name:"پفک نمکی",price:0,category:"تنقلات",image:"images/pofak.svg",inStock:true},
+{id:33,name:"شکلات کیت‌کت",price:0,category:"تنقلات",image:"images/kitkat.svg",inStock:true},
+{id:41,name:"مایع ظرفشویی پریل",price:0,category:"شوینده و بهداشتی",image:"images/dishsoap.svg",inStock:true},
+{id:42,name:"شامپو صولتی",price:0,category:"شوینده و بهداشتی",image:"images/shampoo.svg",inStock:true},
+{id:51,name:"برنج طارم هاشمی ۱۰ کیلویی",price:0,category:"برنج و حبوبات",image:"images/rice.svg",inStock:true},
+{id:52,name:"عدس بسته‌بندی ۹۰۰ گرمی",price:0,category:"برنج و حبوبات",image:"images/lentil.svg",inStock:true},
+{id:53,name:"لوبیا چیتی",price:0,category:"برنج و حبوبات",image:"images/beans.svg",inStock:true},
+{id:61,name:"رب گوجه‌فرنگی ۱ کیلویی",price:0,category:"کنسرو و رب",image:"images/tomato.svg",inStock:true},
+{id:62,name:"کنسرو لوبیا چیتی",price:0,category:"کنسرو و رب",image:"images/canned.svg",inStock:true}
+];
+let cart=[],currentCategory="all",query="";
+const fa=n=>Number(n).toLocaleString("fa-IR");
+function renderCategories(){const cats=["all",...new Set(products.map(p=>p.category))];categories.innerHTML=cats.map(c=>`<button class="cat-btn ${c===currentCategory?"active":""}" onclick="filterCategory('${c}')">${c==="all"?"همه محصولات":c}</button>`).join("")}
+function filterCategory(c){currentCategory=c;renderCategories();renderProducts()}
+function renderProducts(){
+ const q=query.trim().toLowerCase();
+ const list=products.filter(p=>(currentCategory==="all"||p.category===currentCategory)&&(!q||p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));
+ productsGrid=document.getElementById("products-grid");
+ productsGrid.innerHTML=list.length?list.map(p=>`<div class="product-card ${!p.inStock?"out-of-stock":""}">
+ ${!p.inStock?'<div class="badge">تمام شده</div>':""}<img class="product-img" src="${p.image}" alt="${p.name}">
+ <div class="product-info"><div class="product-name">${p.name}</div>
+ <div class="product-price ${p.price?"":"soon"}">${p.price?fa(p.price)+" تومان":"قیمت به‌زودی"}</div>
+ <button class="add-btn" onclick="addToCart(${p.id})" ${!p.inStock?"disabled":""}>${p.inStock?"افزودن به سبد":"ناموجود"}</button></div></div>`).join(""):`<div class="empty">محصولی با این نام پیدا نشد.</div>`;
+}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p||!p.inStock)return;const i=cart.find(x=>x.id===id);i?i.qty++:cart.push({...p,qty:1});updateCartUI()}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);updateCartUI()}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateCartUI()}
+function updateCartUI(){
+ const qty=cart.reduce((s,i)=>s+i.qty,0),total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+ document.getElementById("cart-count").textContent=fa(qty);document.getElementById("cart-total").textContent=fa(total);
+ document.getElementById("checkout-btn").disabled=!cart.length;
+ document.getElementById("cart-items").innerHTML=cart.length?cart.map(i=>`<div class="cart-item"><img src="${i.image}"><div class="cart-item-info"><div class="cart-item-name">${i.name}</div><div class="cart-item-price">${i.price?fa(i.price*i.qty)+" تومان":"قیمت به‌زودی"}</div><div class="qty"><button onclick="changeQty(${i.id},-1)">−</button><span>${fa(i.qty)}</span><button onclick="changeQty(${i.id},1)">+</button></div></div><button class="remove" onclick="removeFromCart(${i.id})">🗑️</button></div>`).join(""):'<p style="text-align:center;color:#999;padding:50px 0">سبد خرید خالی است</p>';
+}
+function toggleCart(){document.getElementById("cart-sidebar").classList.toggle("open")}
+
+function normalizeDigits(value){return String(value||"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));}
+function normalizePhone(value){return normalizeDigits(value).replace(/\s+/g,"").replace(/-/g,"");}
+function showFormError(msg){const el=document.getElementById("formError");el.textContent=msg;el.style.display="block";}
+function clearFormError(){const el=document.getElementById("formError");el.textContent="";el.style.display="none";}
+function openOrderForm(){clearFormError();document.getElementById("orderFormModal").classList.add("show");document.getElementById("firstName").focus();}
+function closeOrderForm(){document.getElementById("orderFormModal").classList.remove("show");}
+function checkout(){if(!cart.length)return;openOrderForm();}
+async function submitOrder(){
+if(!cart.length)return;
+clearFormError();
+const firstName=document.getElementById("firstName").value.trim();
+const lastName=document.getElementById("lastName").value.trim();
+const phone=normalizePhone(document.getElementById("phone").value);
+const address=document.getElementById("address").value.trim();
+if(!firstName||!lastName||!phone||!address){showFormError("پر کردن تمام کادرها الزامی است.");return;}
+if(!/^09\d{9}$/.test(phone)){showFormError("شماره تماس اشتباه است؛ شماره باید دقیقاً ۱۱ رقمی و با 09 شروع شود.");return;}
+const btn=document.getElementById("submitOrderBtn");btn.disabled=true;btn.textContent="در حال ثبت سفارش...";
+const items=cart.map(i=>({id:i.id,name:i.name,qty:i.qty,price:i.price}));
+try{
+const r=await fetch("https://script.google.com/macros/s/AKfycbz2eK3vV-j1-P7nwgZOsKtxrWkCgTwj6y88gjD8NrE6iHxjYPVFQl-dkp306JNTr8mv/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({firstName:firstName,lastName:lastName,phone:phone,address:address,items:items})});
+const text=await r.text();let d;try{d=JSON.parse(text);}catch(_){throw new Error("پاسخ نامعتبر از سرور دریافت شد.");}
+if(!d.ok)throw new Error(d.error||"خطا در ثبت سفارش");
+cart=[];updateCartUI();closeOrderForm();toggleCart();document.getElementById("successModal").classList.add("show");
+document.getElementById("firstName").value="";document.getElementById("lastName").value="";document.getElementById("phone").value="";document.getElementById("address").value="";
+}catch(e){showFormError(e.message||"ارسال سفارش انجام نشد. لطفاً دوباره تلاش کنید.");console.error(e);}
+finally{btn.disabled=false;btn.textContent="ثبت نهایی سفارش";}
+}
+
+function closeModal(){document.getElementById("successModal").classList.remove("show")}
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;renderProducts()});
+document.getElementById("phone").addEventListener("input",e=>{e.target.value=normalizeDigits(e.target.value).replace(/[^0-9]/g,"").slice(0,11);});
+renderCategories();renderProducts();updateCartUI();
+</script>
+</body>
+</html>
